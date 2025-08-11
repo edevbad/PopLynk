@@ -10,13 +10,14 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
-connectToMongoDB(`${process.env.MONGODB_URL}url_shortner`)
+connectToMongoDB(process.env.MONGO_URI);
 .then(()=>{console.log("MongoDB Connected");
     
 })
 app.use(cors({
-  origin: process.env.FRONTEND_URL, // your frontend URL
-  credentials: true                // allow cookies
+  origin: "https://pop-lynk.vercel.app", // Replace with your Vercel URL
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true
 }));
 app.use(express.json());
 
