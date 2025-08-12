@@ -6,7 +6,7 @@ async function generateNewShortUrl(req, res) {
     const body = req.body;
     if (!body.url) return res.status(400).json({ error: "Url is required" });
       const shortid=  await createShortUrlWithOutUser(body)
-    return res.json({ id : `${process.env.BACKEND_URL}/${shortid}`})
+    return res.json({ id : `https://poplynk-backend.onrender.com/${shortid}`})
 }
 async function handleRedirection(req,res) {
      const shortID = req.params.id;
