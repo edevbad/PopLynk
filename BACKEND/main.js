@@ -8,7 +8,7 @@ dotenv.config();
 
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 connectToMongoDB(process.env.MONGO_URI);
 .then(()=>{console.log("MongoDB Connected");
@@ -25,4 +25,4 @@ app.use(express.json());
 app.use('/',router);
 
 
-app.listen(PORT, () => console.log(`App is listening on ${process.env.BACKEND_URL}`))
+app.listen(PORT, () => console.log(`App is listening on ${PORT}`))
