@@ -15,7 +15,7 @@ connectToMongoDB(process.env.MONGO_URI)
     
 })
 app.use(cors({
-  origin: "https://pop-lynk.vercel.app", // Replace with your Vercel URL
+  origin: "https://poplynk.onrender.com", // Replace with your Vercel URL
   methods: "GET,POST,PUT,DELETE",
   credentials: true
 }));
