@@ -11,7 +11,7 @@ const UrlShortner = () => {
 
   const handleGenerateURL = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/create/", {
+      const response = await axios.post(`https://poplynk-backend.onrender.com/create/`, {
         url: value,
       });
       console.log(response);
