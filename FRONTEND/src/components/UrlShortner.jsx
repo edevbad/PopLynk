@@ -18,7 +18,7 @@ const UrlShortner = () => {
   const handleGenerateURL = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/create/",
+        import.meta.env.VITE_BACKEND_URL+"/create/",
         {
           url: data.url,
           slug: data.slug,
