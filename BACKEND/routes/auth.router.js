@@ -17,7 +17,11 @@ authRouter.get('/authorize',(req,res)=>{
 authRouter.post('/register',RegisterUser);
 authRouter.post('/login',LoginUser);
 authRouter.post('/logout',(req,res)=>{
-    res.clearCookie("accessToken");
+    res.clearCookie("accessToken",{
+    httpOnly: true,   // Cannot be accessed via JS
+    secure: true,    // Set to true in production with HTTPS
+    sameSite: "none",
+    });
     res.status(200).json({ message: "Logged out successfully" });
 });
 
