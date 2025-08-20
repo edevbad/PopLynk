@@ -7,6 +7,6 @@ export default function authMiddleWare(req, res, next) {
     req.user = decoded.id;
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Unauthorized: Invalid token" });
+    next();
   }
 }
