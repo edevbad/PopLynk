@@ -44,11 +44,9 @@ const landingRoute = new createRoute({
 beforeLoad: async() => {
     const { auth } = store.getState();
   const res =  await axios.get(import.meta.env.VITE_BACKEND_URL +'/auth/authorize',{withCredentials:true})  
-  console.log(res.data.authenticated);
   
   if(res.data.authenticated === true){
     store.dispatch(authenticate())
-    console.log(auth.isAuthenticated);
   }
 }
 });
