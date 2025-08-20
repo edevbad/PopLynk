@@ -13,7 +13,7 @@ async function generateNewShortUrl(req, res) {
        shortid=  await createShortUrlWithOutUser(req.body)
     }
 
-    return res.json({ id : `http://localhost:3000/${shortid}`})
+    return res.json({ id : `${process.env.BASE_URL}/${shortid}`})
 }
 async function handleRedirection(req,res) {
      const shortID = req.params.id;
