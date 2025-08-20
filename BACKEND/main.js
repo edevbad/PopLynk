@@ -18,7 +18,7 @@ connectToMongoDB(process.env.MONGO_URI)
 app.use(cookieParser());
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://poplynk.onrender.com",
   credentials: true
 }));
 
