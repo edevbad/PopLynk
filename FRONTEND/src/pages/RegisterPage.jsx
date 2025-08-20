@@ -20,7 +20,7 @@ const RegisterPage = () => {
       if (formData.password !== formData.confirmPassword) {
         throw new Error("Password and confirm password don't match");
       }
-      const response = await axios.post("http://localhost:3000/auth/register", {
+      const response = await axios.post(import.meta.env.VITE_BACKEND_URL+"/auth/register", {
         email: formData.email,
         username: formData.username,
         password: formData.password,
