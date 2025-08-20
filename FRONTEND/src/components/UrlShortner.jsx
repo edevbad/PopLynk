@@ -79,7 +79,7 @@ const UrlShortner = () => {
           </label>
           <div className="flex rounded-lg border border-gray-300 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-400">
             <span className="bg-gray-100 text-gray-600 px-3 py-2 text-sm whitespace-nowrap">
-              http://localhost:3000/
+              {import.meta.env.VITE_BACKEND_URL+'/'}
             </span>
             <input
               type="text"
