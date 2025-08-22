@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     password:{
         type : String,
         required : true,
+        select : false,  // will not return password field in queries by default
     }
 });
 const USER = mongoose.model('user',userSchema);

@@ -12,8 +12,10 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -21,13 +23,16 @@ export default function LoginPage() {
         { email, password },
         { withCredentials: true }
       );
-
+      console.log(response);
+      
+      setLoading(false);
       if (response.status === 200) {
         const user = response.data.user;
         dispatch(authenticate(user));
         navigate({ to: "/" });
       }
     } catch (error) {
+      setLoading(false);
       setError(error.response?.data?.msg || "Login failed");
       console.error("Error:", error);
     }
@@ -83,9 +88,15 @@ export default function LoginPage() {
           {/* Button */}
           <button
             type="submit"
-            className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-200"
+            disabled={loading}
+            className="flex justify-center items-center w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-200"
           >
-            Login
+
+            {loading ? (
+      <div className="w-6 h-6 border-4 border-white-500 border-t-transparent rounded-full animate-spin"></div>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
 

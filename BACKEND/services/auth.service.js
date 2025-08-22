@@ -1,33 +1,46 @@
 import { USER } from "../models/user.model.js";
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt';
 
 
-const createUser = async(body)=>{
+
+const createUser = async(username,email,password)=>{
 const exist = await USER.findOne(
-    { email: body.email }
+    { email }
   ) || await USER.findOne(
-    { username: body.username }
+    { username: username }
   )
+if(exist) return null;
 
-if(exist) return "user already exists";
+ // hash the password
+  const saltRounds = 10; // you can adjust cost factor
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-await USER.create({
-        email:body.email,
-        username: body.username,
-        password: body.password,
+const user = await USER.create({
+        email,
+        username,
+        password : hashedPassword
     });
-     return "successfully created";
-    
+     return user;
 }
 
 const verifyUser = async(email,password)=>{
-    return  await USER.findOne(
+
+    const user =   await USER.findOne(
         {
           email : email,
-          password:password
         }
-    )
+    ).select('+password')
+    
+       const isMatch =  await bcrypt.compare(password, user.password);   
+       if(!isMatch) return null;
+        // convert to object and remove password
+  const { password: _, ...userWithoutPassword } = user.toObject();
+  return userWithoutPassword;  
+
 }
+
+
 const signToken = async(id)=>{
     const token = jwt.sign({id}, process.env.JWT_SECRET , {expiresIn : "20m"});
     return token;

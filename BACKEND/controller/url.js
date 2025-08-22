@@ -12,8 +12,7 @@ async function generateNewShortUrl(req, res) {
     else{
        shortid=  await createShortUrlWithOutUser(req.body)
     }
-
-    return res.json({ id : `${process.env.BASE_URL}/${shortid}`})
+      return res.json({ id : `${process.env.BASE_URL}/${shortid}`})
 }
 async function handleRedirection(req,res) {
      const shortID = req.params.id;

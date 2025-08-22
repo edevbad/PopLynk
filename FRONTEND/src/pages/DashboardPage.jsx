@@ -56,7 +56,7 @@ const DashboardPage = () => {
 
       <div className="w-[95%] max-w-6xl mx-auto mt-10 bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
         <h2 className="text-2xl font-semibold mb-6 text-gray-800 flex items-center gap-2">
-           My Links
+           Analytics
         </h2>
     {loading ? (<Loader/>):
         (urls.length === 0 ? (

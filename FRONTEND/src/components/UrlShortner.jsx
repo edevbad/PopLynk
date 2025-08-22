@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { Copy, Link as LinkIcon } from "lucide-react";
+import { FiCopy, FiLink } from "react-icons/fi";
+import Loader from "./Loader";
 
 const UrlShortner = () => {
   const [shortURL, setShortURL] = useState(null);
@@ -34,7 +35,7 @@ const UrlShortner = () => {
   };
 
   const onSubmit = async (data) => {
-    handleGenerateURL(data);
+    await handleGenerateURL(data);
   };
 
   const handleCopy = () => {
@@ -45,12 +46,12 @@ const UrlShortner = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-[95%] max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100 flex flex-col gap-6"
+      className="w-[100%] max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100 flex flex-col gap-6"
     >
       {/* Heading */}
       <div className="text-center">
         <h2 className="text-xl font-semibold text-gray-800 flex items-center justify-center gap-2">
-          <LinkIcon className="w-5 h-5 text-indigo-600" />
+          <FiLink className="w-5 h-5 text-indigo-600" />
           Shorten your link
         </h2>
         <p className="text-sm text-gray-500 mt-1">
@@ -79,7 +80,7 @@ const UrlShortner = () => {
           </label>
           <div className="flex rounded-lg border border-gray-300 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-400">
             <span className="bg-gray-100 text-gray-600 px-3 py-2 text-sm whitespace-nowrap">
-              {import.meta.env.VITE_BACKEND_URL+'/'}
+              {'/'}
             </span>
             <input
               type="text"
@@ -108,7 +109,9 @@ const UrlShortner = () => {
           disabled={isSubmitting}
           className="bg-indigo-600 text-white font-medium rounded-lg py-2 px-6 transition hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-300 w-full sm:w-auto"
         >
-          {isSubmitting ? "Generating..." : "Generate URL"}
+          {isSubmitting ? 
+      <div className="w-6 h-6 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+          : "Generate"}
         </button>
 
         {shortURL && (
@@ -117,7 +120,7 @@ const UrlShortner = () => {
             className="flex items-center gap-2 cursor-pointer bg-indigo-50 px-4 py-2 rounded-lg border border-indigo-200 hover:bg-indigo-100 text-indigo-700 font-medium truncate w-full sm:w-auto transition"
           >
             <span className="truncate">{shortURL}</span>
-            <Copy className="w-4 h-4" />
+            <FiCopy className="w-4 h-4" />
           </div>
         )}
       </div>

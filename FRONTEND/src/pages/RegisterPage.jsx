@@ -9,6 +9,7 @@ const RegisterPage = () => {
     password: "",
     confirmPassword: ""
   });
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,6 +17,7 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (formData.password !== formData.confirmPassword) {
         throw new Error("Password and confirm password don't match");
@@ -24,9 +26,12 @@ const RegisterPage = () => {
         email: formData.email,
         username: formData.username,
         password: formData.password,
-      });
+      },{withCredentials:true});
       console.log(response);
+      
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error:", error);
     }
   };
@@ -84,9 +89,12 @@ const RegisterPage = () => {
 
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition duration-200 shadow-md hover:shadow-lg"
+            className="flex items-center justify-center w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition duration-200 shadow-md hover:shadow-lg"
           >
-            Sign Up
+            {loading ? 
+      <div className="w-6 h-6 border-4 border-white-500 border-t-transparent rounded-full animate-spin"></div>
+            :
+            "Sign Up"}
           </button>
         </form>
 
