@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticate } from "../store/auth/auth.slice.js";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -23,12 +24,12 @@ export default function LoginPage() {
         { email, password },
         { withCredentials: true }
       );
-      console.log(response);
       
       setLoading(false);
       if (response.status === 200) {
         const user = response.data.user;
         dispatch(authenticate(user));
+        toast.success("Login Successful")
         navigate({ to: "/" });
       }
     } catch (error) {
@@ -56,7 +57,7 @@ export default function LoginPage() {
             placeholder="Email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none text-gray-800 placeholder-gray-400"
             required
           />
 
@@ -67,7 +68,7 @@ export default function LoginPage() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none text-gray-800 placeholder-gray-400"
             required
           />
 

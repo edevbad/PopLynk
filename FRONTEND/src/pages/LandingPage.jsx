@@ -2,34 +2,47 @@ import { Link } from "@tanstack/react-router";
 import UrlShortner from "../components/UrlShortner";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SmoothScroll from "../components/SmoothScroll";
 import { useEffect, useState } from "react";
 import LandingPageSkeleton from "./LandingPageSkeleton";
+import LoadingPage from "./LoadingPage";
 import axios from "axios";
+import { authenticate } from "../store/auth/auth.slice";
 
 const LandingPage = () => {
   const authSlice = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
-  const [ready, setReady] = useState(false);
+  const dispatch = useDispatch();
+  const [skeleton, setSkeleton] = useState(true)
 
+  // ✅ Run side effect properly
   useEffect(() => {
-    // Ping backend to wake it up
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/health`)
-      .then(() => {
-        setReady(true);
-        setLoading(false);
-      })
-      .catch(() => {
-        setTimeout(() => {
-          // retry after delay
-          setLoading(false);
-        }, 3000);
-      });
-  }, []);
+    const checkAuth = async () => {
+      if (authSlice.isAuthenticated) return;
 
-  if (!ready) return <LandingPageSkeleton />;
+      try {
+        const res = await axios.get(
+          import.meta.env.VITE_BACKEND_URL + "/auth/authorize",
+          { withCredentials: true }
+        );
+
+        if (res.data.authenticated) {
+          dispatch(authenticate(res.data.user));
+        }
+      } catch (err) {
+        console.error("Auth check failed:", err.message);
+      }
+    };
+
+    if (!loading) {
+      checkAuth();
+    }
+  }, [loading, authSlice.isAuthenticated, dispatch]);
+
+  if (loading) return <LoadingPage setLoading={setLoading} />;
+
+  if(skeleton) return <LandingPageSkeleton setSkeleton={setSkeleton}/>
 
   return (
     <>

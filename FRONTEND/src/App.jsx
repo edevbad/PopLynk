@@ -1,10 +1,14 @@
-import { Outlet } from "@tanstack/react-router"
+import { Outlet, useRouterState } from "@tanstack/react-router"
+import { AnimatePresence,motion } from "framer-motion"
 import { Toaster } from "react-hot-toast"
 
 function App() {
+  const { location } = useRouterState();
+
+
   return (
     <>
-    <Outlet/>
+  <Outlet />
     <Toaster
         position="bottom-right"
         toastOptions={{
@@ -16,8 +20,9 @@ function App() {
             borderRadius: "8px",
           },
         }}
-      />
-    </>
+      /> 
+      </>
+    
   )
 }
 

@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link,redirect,useNavigate } from "@tanstack/react-router";
 import axios from "axios";
+import {toast} from 'react-hot-toast'
+import { useDispatch } from "react-redux"; 
+import { authenticate } from "../store/auth/auth.slice.js";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +13,8 @@ const RegisterPage = () => {
     confirmPassword: ""
   });
   const [loading, setLoading] = useState(false)
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -20,19 +24,25 @@ const RegisterPage = () => {
     setLoading(true);
     try {
       if (formData.password !== formData.confirmPassword) {
-        throw new Error("Password and confirm password don't match");
+        toast.error("Password and Confirm Password doesnot Match!");
+        setLoading(false)
+        return
       }
       const response = await axios.post(import.meta.env.VITE_BACKEND_URL+"/auth/register", {
         email: formData.email,
         username: formData.username,
         password: formData.password,
       },{withCredentials:true});
-      console.log(response);
-      
-      setLoading(false);
+      if(response.status === 201){
+        const user = response.data.user;
+        dispatch(authenticate(user));
+        toast.success("Account created successfully 🎉");
+        setLoading(false);
+        navigate({ to: "/" });
+      }
     } catch (error) {
       setLoading(false);
-      console.error("Error:", error);
+toast.error(error.response.data.msg)   
     }
   };
 

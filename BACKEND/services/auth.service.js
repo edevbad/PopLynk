@@ -1,5 +1,5 @@
 import { USER } from "../models/user.model.js";
-import jwt from 'jsonwebtoken'
+import jwt, { decode } from 'jsonwebtoken'
 import bcrypt from 'bcrypt';
 
 
@@ -40,9 +40,14 @@ const verifyUser = async(email,password)=>{
 
 }
 
+const findUserById = async(id)=>{
+    const user = await USER.findOne({_id : id});
+    if(!user) return null;
+    return user;
+}
 
 const signToken = async(id)=>{
-    const token = jwt.sign({id}, process.env.JWT_SECRET , {expiresIn : "20m"});
+    const token = jwt.sign({id}, process.env.JWT_SECRET , {expiresIn : "1h"});
     return token;
     
 }
@@ -52,8 +57,8 @@ const verifyToken = (token) => {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   return decoded; // { id: ..., username: ..., iat: ..., exp: ... }
 } catch (err) {
-  console.error("Invalid token");
+  return null
 }
 }
 
-export {createUser,verifyUser,signToken,verifyToken};
+export {createUser,verifyUser,signToken,verifyToken,findUserById};

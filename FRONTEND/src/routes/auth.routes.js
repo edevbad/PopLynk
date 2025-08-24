@@ -21,15 +21,17 @@ const registerRoute = new createRoute({
   path: "/register",
   component: RegisterPage,
 });
+
 const dashboardRoute = new createRoute({
   getParentRoute: () => rootRoute,
   path: "/dashboard",
   component: DashBoardPage,
   beforeLoad: async() => {
     const { auth } = store.getState();
+    if(auth.isAuthenticated) return;
   const res =  await axios.get(import.meta.env.VITE_BACKEND_URL +'/auth/authorize',{withCredentials:true})
- if( res.data.authenticated){
-  store.dispatch(authenticate())
+  if(res.data.authenticated){
+  store.dispatch(authenticate(res.data.user))
   }
     else  {
       throw redirect({ to: "/login" });
@@ -41,14 +43,6 @@ const landingRoute = new createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
   component: LandingPage,
-beforeLoad: async() => {
-    const { auth } = store.getState();
-  const res =  await axios.get(import.meta.env.VITE_BACKEND_URL +'/auth/authorize',{withCredentials:true})  
-  
-  if(res.data.authenticated === true){
-    store.dispatch(authenticate())
-  }
-}
 });
 
 

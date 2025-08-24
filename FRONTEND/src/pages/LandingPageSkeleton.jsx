@@ -1,6 +1,10 @@
 import SmoothScroll from "../components/SmoothScroll";
 
-const LandingPageSkeleton = () => {
+const LandingPageSkeleton = ({setSkeleton}) => {
+  setTimeout(() => {
+    setSkeleton(false)
+  }, 500);
+
   return (
     <>
     <SmoothScroll/>
