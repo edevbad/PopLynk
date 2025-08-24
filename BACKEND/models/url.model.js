@@ -22,8 +22,15 @@ const urlSchema = new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref : "user"
+    },
+    expiresAt:{
+        type : Date,
+        default : null
     }
 });
+
+// TTL index → MongoDB deletes document automatically when expiresAt passes
+urlSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 const URL = mongoose.model('url',urlSchema);
 

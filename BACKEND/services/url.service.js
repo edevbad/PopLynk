@@ -25,11 +25,14 @@ const createShortUrlWithUser = async (body, user,res) => {
 }
 const createShortUrlWithOutUser = async (body) => {
     if (!body.url) return res.status(400).json({ error: "Url is required" });
+
+    
     const shortid = nanoid(8);
     await URL.create({
         short_URL: shortid,
         redirect_URL: body.url,
         visits: 0,
+        expiresAt : new Date(Date.now() + 7*24*60*60*1000) // 7 days from now
     });
 
     return shortid
