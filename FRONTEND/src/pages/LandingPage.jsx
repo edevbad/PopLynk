@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import UrlShortner from "../components/UrlShortner";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -14,7 +13,8 @@ const LandingPage = () => {
   const authSlice = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const [skeleton, setSkeleton] = useState(true)
+  const [skeleton, setSkeleton] = useState(true);
+
 
   // ✅ Run side effect properly
   useEffect(() => {
@@ -40,9 +40,11 @@ const LandingPage = () => {
     }
   }, [loading, authSlice.isAuthenticated, dispatch]);
 
+
   if (loading) return <LoadingPage setLoading={setLoading} />;
 
   if(skeleton) return <LandingPageSkeleton setSkeleton={setSkeleton}/>
+
 
   return (
     <>
@@ -51,12 +53,12 @@ const LandingPage = () => {
         data-scroll-container
         className="flex flex-col bg-gray-50 text-gray-800"
       >
-        <NavBar />
+        <NavBar/>
 
         {/* Hero */}
         <section
           data-scroll-section
-          className="flex flex-col items-center justify-center text-center px-6 py-20 bg-gradient-to-b from-indigo-50 via-white to-white flex-grow"
+          className="relative flex flex-col items-center justify-center text-center px-6 py-20 bg-gradient-to-b from-indigo-50 via-white to-white flex-grow"
         >
           <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight max-w-4xl tracking-tight">
             Shrink your links,{" "}

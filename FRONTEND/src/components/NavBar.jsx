@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/auth/auth.slice.js";
 import axios from "axios";
 import ConfirmDialog from "./ConfirmDialog.jsx";
-import { useState,useRef,useEffect } from "react";
-import { FiUser } from "react-icons/fi";
+import { useState,useRef } from "react";
+import { FiUser,FiMenu,FiX } from "react-icons/fi";
 import {gsap} from "gsap";
 import {useGSAP} from "@gsap/react"
+import Menu from "./Menu.jsx";
 
 const NavBar = () => {
   const [isDialogOpen, setDialogOpen] = useState(false);
@@ -15,6 +16,8 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const [profilePanel, setProfilePanel] = useState(false)
   const profilePanelRef = useRef(null)
+  const [menu, setMenu] = useState(false)
+  const menuRef = useRef(null)
 
   const handleLogout = async () => {
     await axios.post(
@@ -44,13 +47,28 @@ const NavBar = () => {
       ease: "power2.in",
     });
   }
-}, [profilePanel]);
+
+  if(menu){
+    gsap.to(menuRef.current,{
+      top:"100%",
+      duration:0.3,
+      ease:"power2.out"
+    })
+  }
+  else{
+    gsap.to(menuRef.current,{
+      top:"-100%",  
+      duration:0.3,
+      ease:"power2.in"
+    })
+  }
+}, [menu,profilePanel]);
 
   
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <nav className="sticky top-0 z-[90] bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
           {/* Logo */}
           <div className="text-2xl font-extrabold text-indigo-600 tracking-tight">
@@ -59,7 +77,8 @@ const NavBar = () => {
 
           {/* Navigation */}
           {authSlice.isAuthenticated ? (
-            <div className="flex gap-6 items-center">
+            <div>
+              <div className="flex gap-6 items-center max-[400px]:hidden">
               <Link
                 to="/"
                 className="text-gray-700 hover:text-indigo-600 transition-colors"
@@ -78,11 +97,7 @@ const NavBar = () => {
               <FiUser/>
             </button>
             <div ref={profilePanelRef} className="absolute  rounded-b-2xl flex flex-col gap-4 top-14 p-5 right-[-100%] bg-white">
-              <button
-                className="px-4 py-2 text-black rounded-xl font-medium  hover:text-red-600 transition-all"
-              >
-                Edit Profile
-              </button>
+              
               <button
                 className="px-4 py-2 text-black rounded-xl font-medium  hover:text-red-600 transition-all"
                 onClick={() => setDialogOpen(true)}
@@ -90,7 +105,13 @@ const NavBar = () => {
                 Logout
               </button>
               </div> 
-              
+              </div>
+              <div>
+                <button onClick={()=>setMenu(!menu)} className="min-[400px]:hidden px-4 py-2 bg-gray-200 text-black rounded-xl font-medium shadow hover:bg-gray-300 transition-all relative">
+                   {menu ? <FiX size={22} /> : <FiMenu size={22} />}
+                </button>
+               <Menu ref={menuRef} open={menu} setOpen={setMenu} setLogoutDialogOpen={setDialogOpen}/>
+               </div>
             </div>
           ) : (
             <div className="flex gap-4 items-center">
@@ -102,10 +123,11 @@ const NavBar = () => {
               </Link>
               <Link
                 to="/register"
-                className="px-5 py-2 bg-indigo-600 text-white rounded-xl font-medium shadow hover:bg-indigo-700 transition-all"
+                className="max-[400px]:hidden px-5 py-2 bg-indigo-600 text-white rounded-xl font-medium shadow hover:bg-indigo-700 transition-all"
               >
                 Get Started
               </Link>
+               
             </div>
           )}
         </div>
