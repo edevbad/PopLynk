@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-
+const PORT = process.env.PORT || 3000;
 connectToMongoDB(process.env.MONGO_URI).then(() => {
   console.log("MongoDB Connected");
 });
@@ -30,6 +30,6 @@ app.get("/health", (req, res) => {
 app.use("/", router);
 app.use("/auth", authRouter);
 
-app.listen(process.env.PORT, () =>
+app.listen(PORT, () =>
   console.log(`App is listening on http://localhost:${process.env.PORT}`)
 );
