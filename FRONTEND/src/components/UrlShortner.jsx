@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { FiCopy, FiLink } from "react-icons/fi";
 import Loader from "./Loader";
+import {toast} from "react-hot-toast"
 
 const UrlShortner = () => {
   const [shortURL, setShortURL] = useState(null);
@@ -41,6 +42,7 @@ const UrlShortner = () => {
   const handleCopy = () => {
     if (!shortURL) return;
     navigator.clipboard.writeText(shortURL);
+    toast.success("Copied to Clipboard");
   };
 
   return (
