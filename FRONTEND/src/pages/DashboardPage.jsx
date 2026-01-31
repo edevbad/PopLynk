@@ -52,7 +52,7 @@ const DashboardPage = () => {
   return (
     <>
 
-      <div className="w-[95%] min-h-screen max-w-6xl mx-auto my-10 bg-primary/20 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-secondary/20">
+      <div className="w-[95%] min-h-screen max-w-2xl mx-auto my-10 bg-primary/20 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-secondary/20">
         <h2 className="text-2xl font-semibold mb-6 text-secondary/70 flex items-center gap-2">
            Analytics
         </h2>

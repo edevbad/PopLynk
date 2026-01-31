@@ -27,7 +27,7 @@ useEffect(() => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b">
+    <div className="min-h-screen max-w-2xl mx-auto flex items-center justify-center bg-gradient-to-b">
       <div className="bg-primary/10 backdrop-blur-sm border border-secondary/20 p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-extrabold text-center mb-6 text-secondary/70">
           Welcome Back

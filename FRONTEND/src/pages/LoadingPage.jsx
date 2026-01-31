@@ -39,12 +39,12 @@ const LoadingPage = ({ setLoading }) => {
   }, [setLoading]);
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-primary">
+    <div className="flex h-screen w-screen items-center justify-center bg-indigo ">
       <div className="text-center">
         <div className="mb-4 flex justify-center">
           {/* Simple spinner */}
           <svg
-            className="animate-spin h-10 w-10 text-blue-600"
+            className="animate-spin h-10 w-10 text-indigo"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
