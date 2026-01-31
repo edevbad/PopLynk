@@ -1,9 +1,7 @@
-import { useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "@tanstack/react-router";
+import {  useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "@tanstack/react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { authenticate } from "../store/auth/auth.slice.js";
-import toast from "react-hot-toast";
+import {  loginUser } from "../store/auth/auth.slice.js";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -13,31 +11,20 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
 
+useEffect(() => {
+  if(auth.isAuthenticated)
+    navigate('/')
+}, [auth.isAuthenticated])
+  
+   
   const handleLogin = async (e) => {
-    setLoading(true);
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        import.meta.env.VITE_BACKEND_URL+"/auth/login",
-        { email, password },
-        { withCredentials: true }
-      );
-      
-      setLoading(false);
-      if (response.status === 200) {
-        const user = response.data.user;
-        dispatch(authenticate(user));
-        toast.success("Login Successful")
-        navigate({ to: "/" });
-      }
-    } catch (error) {
-      setLoading(false);
-      setError(error.response?.data?.msg || "Login failed");
-      console.error("Error:", error);
-    }
+    e.preventDefault(); 
+    const formData = {email,password}   
+    dispatch(loginUser(formData))
+
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -49,7 +36,7 @@ export default function LoginPage() {
           Thanks For Joining <Link to="/" className="text-blue-600 font-semibold">PopLynk</Link>
         </p>
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={(e)=>handleLogin(e)} className="space-y-4">
           {/* Email */}
           <input
             type="email"
@@ -89,11 +76,11 @@ export default function LoginPage() {
           {/* Button */}
           <button
             type="submit"
-            disabled={loading}
+            disabled={auth.isLoading}
             className="flex justify-center items-center w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-200"
           >
 
-            {loading ? (
+            {auth.isLoading ? (
       <div className="w-6 h-6 border-4 border-white-500 border-t-transparent rounded-full animate-spin"></div>
             ) : (
               "Login"

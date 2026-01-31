@@ -48,7 +48,7 @@ const UrlShortner = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-[100%] max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100 flex flex-col gap-6"
+      className="w-[100%] max-w-3xl mx-auto bg-white rounded-2xl p-8 border border-gray-300 flex flex-col gap-6"
     >
       {/* Heading */}
       <div className="text-center">

@@ -25,12 +25,16 @@ const user = await USER.create({
 }
 
 const verifyUser = async(email,password)=>{
-
+  
     const user =   await USER.findOne(
         {
-          email : email,
+          email : email
         }
-    ).select('+password')
+    ).select('+password')    
+
+    if(!user){
+      return null
+    }    
     
        const isMatch =  await bcrypt.compare(password, user.password);   
        if(!isMatch) return null;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import NavBar from "../components/NavBar";
 import ConfirmDialog from "../components/ConfirmDialog";
 import Loader from '../components/Loader'
 import {toast} from 'react-hot-toast'
@@ -52,9 +51,8 @@ const DashboardPage = () => {
 
   return (
     <>
-    <NavBar />
 
-      <div className="w-[95%] max-w-6xl mx-auto mt-10 bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+      <div className="w-[95%] min-h-screen max-w-6xl mx-auto mt-10 bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
         <h2 className="text-2xl font-semibold mb-6 text-gray-800 flex items-center gap-2">
            Analytics
         </h2>

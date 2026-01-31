@@ -35,16 +35,16 @@ const NavBar = () => {
   if (profilePanel) {
     // Slide in
     gsap.to(profilePanelRef.current, {
-      right: "0%",
-      duration: 0.3,
-      ease: "power2.out",
+      scale : 1,
+      opacity:1,
+      duration: 0.2,
     });
   } else {
     // Slide out
     gsap.to(profilePanelRef.current, {
-      right: "-100%",
-      duration: 0.3,
-      ease: "power2.in",
+      opacity : 0,
+      scale : 0.8,
+      duration: 0.2,
     });
   }
 
@@ -68,7 +68,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-[90] bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <nav className="sticky md:px-10 top-0 z-[90] bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
           {/* Logo */}
           <div className="text-2xl font-extrabold text-indigo-600 tracking-tight">
@@ -77,8 +77,8 @@ const NavBar = () => {
 
           {/* Navigation */}
           {authSlice.isAuthenticated ? (
-            <div>
-              <div className="flex gap-6 items-center max-[400px]:hidden">
+            <div className="">
+              <div className="relative flex gap-6 items-center max-[400px]:hidden">
               <Link
                 to="/"
                 className="text-gray-700 hover:text-indigo-600 transition-colors"
@@ -93,13 +93,13 @@ const NavBar = () => {
               >
                 Analytics
               </Link>
-            <button onClick={()=>setProfilePanel(!profilePanel)} className="px-4 py-2 bg-gray-200 text-black rounded-xl font-medium shadow hover:bg-gray-300 transition-all relative">
+            <button onClick={()=>setProfilePanel(!profilePanel)} className="cursor-pointer px-4 py-2 bg-gray-200 text-black rounded-xl font-medium shadow hover:bg-gray-300 transition-all relative">
               <FiUser/>
             </button>
-            <div ref={profilePanelRef} className="absolute  rounded-b-2xl flex flex-col gap-4 top-14 p-5 right-[-100%] bg-white">
+            <div ref={profilePanelRef} className="absolute opacity-0 -right-[20%] top-[150%]  rounded-xl flex flex-col gap-4  border border-gray-200 bg-white">
               
               <button
-                className="px-4 py-2 text-black rounded-xl font-medium  hover:text-red-600 transition-all"
+                className="px-10 py-2 text-black rounded-xl cursor-pointer  hover:text-red-600 transition-all"
                 onClick={() => setDialogOpen(true)}
               >
                 Logout

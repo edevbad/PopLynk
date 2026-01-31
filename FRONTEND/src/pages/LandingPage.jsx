@@ -1,49 +1,20 @@
 import UrlShortner from "../components/UrlShortner";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import SmoothScroll from "../components/SmoothScroll";
 import { useEffect, useState } from "react";
 import LandingPageSkeleton from "./LandingPageSkeleton";
 import LoadingPage from "./LoadingPage";
 import axios from "axios";
-import { authenticate } from "../store/auth/auth.slice";
+import { authenticate, checkAuth } from "../store/auth/auth.slice";
 
 const LandingPage = () => {
-  const authSlice = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const [skeleton, setSkeleton] = useState(true);
 
 
-  // ✅ Run side effect properly
-  useEffect(() => {
-    const checkAuth = async () => {
-      if (authSlice.isAuthenticated) return;
-
-      try {
-        const res = await axios.get(
-          import.meta.env.VITE_BACKEND_URL + "/auth/authorize",
-          { withCredentials: true }
-        );
-
-        if (res.data.authenticated) {
-          dispatch(authenticate(res.data.user));
-        }
-      } catch (err) {
-        console.error("Auth check failed:", err.message);
-      }
-    };
-
-    if (!loading) {
-      checkAuth();
-    }
-  }, [loading, authSlice.isAuthenticated, dispatch]);
-
-
-  if (loading) return <LoadingPage setLoading={setLoading} />;
-
-  if(skeleton) return <LandingPageSkeleton setSkeleton={setSkeleton}/>
+  const {isLoading} = useSelector(state => state.auth)
+  
+  if(isLoading) return <LandingPageSkeleton setSkeleton={setSkeleton}/>
 
 
   return (
@@ -53,23 +24,20 @@ const LandingPage = () => {
         data-scroll-container
         className="flex flex-col bg-gray-50 text-gray-800"
       >
-        <NavBar/>
 
         {/* Hero */}
         <section
           data-scroll-section
           className="relative flex flex-col items-center justify-center text-center px-6 py-20 bg-gradient-to-b from-indigo-50 via-white to-white flex-grow"
         >
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight max-w-4xl tracking-tight">
-            Shrink your links,{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+          <h1 className="text-5xl  font-extrabold text-gray-900 leading-tight max-w-4xl tracking-tight">
+            Shrink your links,
               expand
-            </span>{" "}
             your reach
           </h1>
           <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             Shorten, customize, and track your links effortlessly. Perfect for
-            social media, email, and anywhere you share content 🚀
+            social media, email, and anywhere you share content.
           </p>
 
           {/* CTA Form */}
@@ -122,8 +90,6 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* Footer */}
-        <Footer />
       </div>
     </>
   );
