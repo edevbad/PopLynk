@@ -86,14 +86,14 @@ const NavBar = () => {
               <Link
                 to="/"
                 className=" hover:text-indigo-600 transition-colors"
-                activeProps={{ className: "text-indigo-600 font-medium" }}
+                activeProps={{ className: "text-indigo-600 " }}
               >
                 Home
               </Link>
               <Link
                 to="/dashboard"
                 className=" hover:text-indigo-600 transition-colors"
-                activeProps={{ className: "text-indigo-600 font-medium" }}
+                activeProps={{ className: "text-indigo-600 " }}
               >
                 Analytics
               </Link>

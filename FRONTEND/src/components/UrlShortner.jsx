@@ -119,7 +119,7 @@ const UrlShortner = () => {
         {shortURL && (
           <div
             onClick={handleCopy}
-            className="flex items-center gap-2 cursor-pointer bg-primary/20 px-4 py-2 rounded-lg border border-secondary/20 hover:bg-indigo-100 text-secondary font-medium truncate w-full sm:w-auto transition"
+            className="flex items-center gap-2 cursor-pointer bg-primary/20 px-4 py-2 rounded-lg border border-secondary/20 hover:bg-secondary/10 text-secondary font-medium truncate w-full sm:w-auto transition"
           >
             <span className="truncate">{shortURL}</span>
             <FiCopy className="w-4 h-4" />
