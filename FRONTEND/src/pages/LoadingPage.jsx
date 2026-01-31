@@ -39,7 +39,7 @@ const LoadingPage = ({ setLoading }) => {
   }, [setLoading]);
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
+    <div className="flex h-screen w-screen items-center justify-center bg-primary">
       <div className="text-center">
         <div className="mb-4 flex justify-center">
           {/* Simple spinner */}
@@ -64,10 +64,10 @@ const LoadingPage = ({ setLoading }) => {
             ></path>
           </svg>
         </div>
-        <h1 className="text-lg font-medium text-gray-700">
+        <h1 className="text-lg font-medium text-secondary/60">
           Waking up server...
         </h1>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-secondary/50">
           Please wait, this may take a few seconds.
         </p>
       </div>

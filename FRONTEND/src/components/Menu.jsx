@@ -6,13 +6,13 @@ const Menu = forwardRef(({ open, setOpen,setLogoutDialogOpen }, ref) => {
   return (
     <div
       ref={ref}
-      className={`fixed h-full inset-0   z-[90] transition-opacity duration-300 ${
+      className={`fixed h-full inset-0 backdrop-blur-sm z-[90] transition-opacity duration-300 ${
         open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       }`}
     >
       {/* Drawer */}
      
-        <ul className="flex bg-white flex-col text-black items-center gap-6 py-10 text-xl font-semibold">
+        <ul className="flex flex-col bg-primary/90 text-secondary items-center gap-6 py-10 text-xl font-semibold">
           <li>
             <Link
               to="/"
@@ -33,7 +33,7 @@ const Menu = forwardRef(({ open, setOpen,setLogoutDialogOpen }, ref) => {
           </li>
           <li>
             <button
-                className="px-4 py-2 text-black rounded-xl font-medium  hover:text-red-600 transition-all"
+                className="px-4 py-2 text-secondary rounded-xl font-medium  hover:text-red-600 transition-all"
                 onClick={() => {
                   setOpen(false)
                   setLogoutDialogOpen(true)

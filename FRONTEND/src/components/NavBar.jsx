@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/auth/auth.slice.js";
 import axios from "axios";
 import ConfirmDialog from "./ConfirmDialog.jsx";
-import { useState,useRef } from "react";
-import { FiUser,FiMenu,FiX } from "react-icons/fi";
+import { useState,useRef, useEffect, useLayoutEffect } from "react";
+import { FiUser,FiMenu,FiX, FiMoon, FiSun } from "react-icons/fi";
 import {gsap} from "gsap";
 import {useGSAP} from "@gsap/react"
 import Menu from "./Menu.jsx";
@@ -18,6 +18,7 @@ const NavBar = () => {
   const profilePanelRef = useRef(null)
   const [menu, setMenu] = useState(false)
   const menuRef = useRef(null)
+  const buttonRef = useRef(null)
 
   const handleLogout = async () => {
     await axios.post(
@@ -37,12 +38,15 @@ const NavBar = () => {
     gsap.to(profilePanelRef.current, {
       scale : 1,
       opacity:1,
+      pointerEvents : 'auto',
+
       duration: 0.2,
     });
   } else {
     // Slide out
     gsap.to(profilePanelRef.current, {
       opacity : 0,
+      pointerEvents : 'none',
       scale : 0.8,
       duration: 0.2,
     });
@@ -68,7 +72,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="sticky md:px-10 top-0 z-[90] bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <nav className="sticky md:px-10 top-0 z-[90] bg-primary/20 backdrop-blur-sm border-b border-secondary/20 shadow-sm">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
           {/* Logo */}
           <div className="text-2xl font-extrabold text-indigo-600 tracking-tight">
@@ -78,28 +82,28 @@ const NavBar = () => {
           {/* Navigation */}
           {authSlice.isAuthenticated ? (
             <div className="">
-              <div className="relative flex gap-6 items-center max-[400px]:hidden">
+              <div className="relative flex gap-6 items-center max-[400px]:hidden text-secondary/60">
               <Link
                 to="/"
-                className="text-gray-700 hover:text-indigo-600 transition-colors"
+                className=" hover:text-indigo-600 transition-colors"
                 activeProps={{ className: "text-indigo-600 font-medium" }}
               >
                 Home
               </Link>
               <Link
                 to="/dashboard"
-                className="text-gray-700 hover:text-indigo-600 transition-colors"
+                className=" hover:text-indigo-600 transition-colors"
                 activeProps={{ className: "text-indigo-600 font-medium" }}
               >
                 Analytics
               </Link>
-            <button onClick={()=>setProfilePanel(!profilePanel)} className="cursor-pointer px-4 py-2 bg-gray-200 text-black rounded-xl font-medium shadow hover:bg-gray-300 transition-all relative">
-              <FiUser/>
+            <button ref={buttonRef} onClick={()=>setProfilePanel(!profilePanel)} className="cursor-pointer px-4 py-2 bg-secondary/10 text-secondary rounded-xl font-medium shadow hover:bg-secondary/20 transition-all relative">
+              <FiUser className="pointer-events-none"/>
             </button>
-            <div ref={profilePanelRef} className="absolute opacity-0 -right-[20%] top-[150%]  rounded-xl flex flex-col gap-4  border border-gray-200 bg-white">
+            <div ref={profilePanelRef} className="absolute opacity-0 -right-[20%] top-[150%]  rounded-xl flex flex-col gap-4  border border-secondary/20 bg-primary/6">
               
               <button
-                className="px-10 py-2 text-black rounded-xl cursor-pointer  hover:text-red-600 transition-all"
+                className="px-10 py-2 text-secondary rounded-xl cursor-pointer  hover:text-red-600 transition-all"
                 onClick={() => setDialogOpen(true)}
               >
                 Logout
@@ -107,7 +111,7 @@ const NavBar = () => {
               </div> 
               </div>
               <div>
-                <button onClick={()=>setMenu(!menu)} className="min-[400px]:hidden px-4 py-2 bg-gray-200 text-black rounded-xl font-medium shadow hover:bg-gray-300 transition-all relative">
+                <button onClick={()=>setMenu(!menu)} className="min-[400px]:hidden px-4 py-2 bg-secondary/10 text-secondary rounded-xl font-medium shadow hover:bg-secondary/20 transition-all relative">
                    {menu ? <FiX size={22} /> : <FiMenu size={22} />}
                 </button>
                <Menu ref={menuRef} open={menu} setOpen={setMenu} setLogoutDialogOpen={setDialogOpen}/>
@@ -117,13 +121,13 @@ const NavBar = () => {
             <div className="flex gap-4 items-center">
               <Link
                 to="/login"
-                className="text-gray-700 font-medium hover:text-indigo-600 transition-colors"
+                className="text-secondary/60 font-medium hover:text-indigo-600 transition-colors"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="max-[400px]:hidden px-5 py-2 bg-indigo-600 text-white rounded-xl font-medium shadow hover:bg-indigo-700 transition-all"
+                className="max-[400px]:hidden px-5 py-2 bg-indigo-600 text-secondary rounded-xl font-medium shadow hover:bg-indigo-700 transition-all"
               >
                 Get Started
               </Link>

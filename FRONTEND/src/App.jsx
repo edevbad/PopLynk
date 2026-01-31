@@ -8,7 +8,7 @@ function App() {
   const { location } = useRouterState();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-w-[350px] bg-gradient-to-b from-indigo via-primary to-indigo flex-col min-h-screen">
     <NavBar/>
   <Outlet/>
     <Footer/>

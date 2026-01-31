@@ -52,23 +52,23 @@ const DashboardPage = () => {
   return (
     <>
 
-      <div className="w-[95%] min-h-screen max-w-6xl mx-auto mt-10 bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
-        <h2 className="text-2xl font-semibold mb-6 text-gray-800 flex items-center gap-2">
+      <div className="w-[95%] min-h-screen max-w-6xl mx-auto my-10 bg-primary/20 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-secondary/20">
+        <h2 className="text-2xl font-semibold mb-6 text-secondary/70 flex items-center gap-2">
            Analytics
         </h2>
     {loading ? (<Loader/>):
         (urls.length === 0 ? (
-          <p className="text-gray-500 text-center py-10">No links created yet.</p>
+          <p className="text-secondary/50 text-center py-10">No links created yet.</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse rounded-xl overflow-hidden">
               <thead>
-                <tr className="bg-gray-50 text-gray-700 text-sm uppercase">
-                  <th className="px-4 py-3 border-b">Original URL</th>
-                  <th className="px-4 py-3 border-b">Short Link</th>
-                  <th className="px-4 py-3 border-b text-center">Clicks</th>
-                  <th className="px-4 py-3 border-b text-center">Created</th>
-                  <th className="px-4 py-3 border-b text-center">Actions</th>
+                <tr className="bg-primary border-b border-secondary/10 text-secondary/60 text-sm uppercase">
+                  <th className="px-4 py-3">Original URL</th>
+                  <th className="px-4 py-3">Short Link</th>
+                  <th className="px-4 py-3 text-center">Clicks</th>
+                  <th className="px-4 py-3 text-center">Created</th>
+                  <th className="px-4 py-3 text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -78,37 +78,37 @@ const DashboardPage = () => {
                   .map((url) => (
                     <tr
                       key={url._id}
-                      className="hover:bg-gray-50 transition text-sm"
+                      className="border-b border-secondary/10 transition text-sm"
                     >
-                      <td className="px-4 py-3 border-b max-w-xs truncate">
+                      <td className="px-4 py-3 max-w-xs truncate">
                         <a
                           href={url.redirect_URL}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-indigo-600 hover:underline"
+                          className="text-secondary/80 hover:underline"
                         >
                           {url.redirect_URL}
                         </a>
                       </td>
-                      <td className="px-4 py-3 border-b">
+                      <td className="px-4 py-3">
                         <span
                           onClick={() => handleCopy(url.short_URL)}
-                          className="cursor-pointer text-indigo-600 hover:underline"
+                          className="cursor-pointer text-secondary/80 hover:underline"
                         >
                           {import.meta.env.VITE_BACKEND_URL +
                             "/" +
                             url.short_URL}
                         </span>
                       </td>
-                      <td className="px-4 py-3 border-b text-center">
+                      <td className="px-4 py-3 text-center">
                         <span className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-600 font-medium">
                           {url.visits}
                         </span>
                       </td>
-                      <td className="px-4 py-3 border-b text-center text-gray-500">
+                      <td className="px-4 py-3 text-center text-secondary/50">
                         {new Date(url.createdAt).toLocaleDateString()}
                       </td>
-                      <td className="px-4 py-3 border-b text-center">
+                      <td className="px-4 py-3 text-center">
                         <button
                           onClick={() => {
                             setSelectedUrlId(url._id);

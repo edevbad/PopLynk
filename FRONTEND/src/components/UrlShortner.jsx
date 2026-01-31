@@ -48,16 +48,16 @@ const UrlShortner = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-[100%] max-w-3xl mx-auto bg-white rounded-2xl p-8 border border-gray-300 flex flex-col gap-6"
+      className="w-[100%] max-w-3xl mx-auto bg-primary rounded-2xl p-8 border border-secondary/20 flex flex-col gap-6"
     >
       {/* Heading */}
       <div className="text-center">
-        <h2 className="text-xl font-semibold text-gray-800 flex items-center justify-center gap-2">
+        <h2 className="text-xl font-semibold text-secondary/90 flex items-center justify-center gap-2">
           <FiLink className="w-5 h-5 text-indigo-600" />
           Shorten your link
         </h2>
-        <p className="text-sm text-gray-500 mt-1">
-          Paste a long URL and get a short one instantly 🚀
+        <p className="text-xs md:text-sm text-secondary/70 mt-1">
+          Paste a long URL and get a short one instantly
         </p>
       </div>
 
@@ -66,7 +66,7 @@ const UrlShortner = () => {
         <input
           type="url"
           placeholder="https://www.example.com"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none text-sm"
+          className="w-full px-4 py-3 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none text-sm"
           {...register("url", { required: true })}
         />
         {errors.url && (
@@ -77,11 +77,11 @@ const UrlShortner = () => {
       {/* Custom Slug Input (if logged in) */}
       {authSlice.isAuthenticated && (
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-secondary/90">
             Custom short link (optional)
           </label>
-          <div className="flex rounded-lg border border-gray-300 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-400">
-            <span className="bg-gray-100 text-gray-600 px-3 py-2 text-sm whitespace-nowrap">
+          <div className="flex rounded-lg border border-secondary/20 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-400">
+            <span className="bg-primary text-secondary/60 px-3 py-2 text-sm primaryspace-nowrap">
               {'/'}
             </span>
             <input
@@ -91,7 +91,7 @@ const UrlShortner = () => {
               {...register("slug")}
             />
           </div>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-secondary/50">
             Leave blank to generate a random short link.
           </p>
         </div>
@@ -109,7 +109,7 @@ const UrlShortner = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="bg-indigo-600 text-white font-medium rounded-lg py-2 px-6 transition hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-300 w-full sm:w-auto"
+          className="bg-indigo text-white font-medium rounded-lg py-2 px-6 transition hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-300 w-full sm:w-auto"
         >
           {isSubmitting ? 
       <div className="w-6 h-6 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
@@ -119,7 +119,7 @@ const UrlShortner = () => {
         {shortURL && (
           <div
             onClick={handleCopy}
-            className="flex items-center gap-2 cursor-pointer bg-indigo-50 px-4 py-2 rounded-lg border border-indigo-200 hover:bg-indigo-100 text-indigo-700 font-medium truncate w-full sm:w-auto transition"
+            className="flex items-center gap-2 cursor-pointer bg-primary/20 px-4 py-2 rounded-lg border border-secondary/20 hover:bg-indigo-100 text-secondary font-medium truncate w-full sm:w-auto transition"
           >
             <span className="truncate">{shortURL}</span>
             <FiCopy className="w-4 h-4" />

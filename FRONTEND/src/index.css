@@ -29,3 +29,11 @@ html {
 }
 
 
+
+@theme{
+  --color-primary : #000;
+  --color-secondary : #fff;
+  --color-indigo : #312c85;
+}
+
+

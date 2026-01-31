@@ -47,13 +47,13 @@ toast.error(error.response.data.msg)
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white px-4">
-      <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg w-full max-w-md border border-gray-100">
-        <h2 className="text-3xl font-extrabold text-center mb-6 text-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b  px-4">
+      <div className="bg-primary/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg w-full max-w-md border border-secondary/20">
+        <h2 className="text-2xl font-extrabold text-center mb-6 text-secondary/80">
           Create an Account
         </h2>
-        <p className="text-center text-gray-600 mb-8 text-sm">
-          Join <Link to="/" className="text-blue-600 font-semibold">PopLynk</Link> and start shrinking links today.
+        <p className="text-center text-secondary/60 mb-8 text-sm">
+          Join <Link to="/" className="text-indigo-600 font-semibold">PopLynk</Link> and start shrinking links today.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -63,7 +63,7 @@ toast.error(error.response.data.msg)
             placeholder="Username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none text-gray-800"
+            className="w-full px-4 py-3 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none text-secondary/70"
             required
           />
 
@@ -73,7 +73,7 @@ toast.error(error.response.data.msg)
             placeholder="Email address"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none text-gray-800"
+            className="w-full px-4 py-3 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none text-secondary/70"
             required
           />
 
@@ -83,7 +83,7 @@ toast.error(error.response.data.msg)
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none text-gray-800"
+            className="w-full px-4 py-3 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none text-secondary/70"
             required
           />
 
@@ -93,24 +93,24 @@ toast.error(error.response.data.msg)
             placeholder="Confirm password"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none text-gray-800"
+            className="w-full px-4 py-3 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none text-secondary/70"
             required
           />
 
           <button
             type="submit"
-            className="flex items-center justify-center w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition duration-200 shadow-md hover:shadow-lg"
+            className="flex items-center justify-center w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-secondary rounded-lg font-medium transition duration-200 shadow-md hover:shadow-lg"
           >
             {loading ? 
-      <div className="w-6 h-6 border-4 border-white-500 border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-6 h-6 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             :
             "Sign Up"}
           </button>
         </form>
 
-        <p className="text-sm text-gray-600 text-center mt-6">
+        <p className="text-sm text-secondary/60 text-center mt-6">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline font-medium">
+          <Link to="/login" className="text-indigo-600 hover:underline font-medium">
             Login
           </Link>
         </p>
