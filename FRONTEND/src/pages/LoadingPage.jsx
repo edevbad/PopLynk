@@ -44,7 +44,7 @@ const LoadingPage = ({ setLoading }) => {
         <div className="mb-4 flex justify-center">
           {/* Simple spinner */}
           <svg
-            className="animate-spin h-10 w-10 text-indigo"
+            className="animate-spin h-10 w-10 text-secondary"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

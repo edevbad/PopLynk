@@ -33,7 +33,7 @@ useEffect(() => {
           Welcome Back
         </h2>
         <p className="text-center text-secondary/60 mb-8 text-sm">
-          Thanks For Joining <Link to="/" className="text-blue-600 font-semibold">PopLynk</Link>
+          Thanks For Joining <Link to="/" className="text-indigo-600 font-semibold">PopLynk</Link>
         </p>
 
         <form onSubmit={(e)=>handleLogin(e)} className="space-y-4">
@@ -44,7 +44,7 @@ useEffect(() => {
             placeholder="Email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none text-secondary/70 placeholder-gray-400"
+            className="w-full px-4 py-2 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none text-secondary/70 placeholder-gray-400"
             required
           />
 
@@ -55,7 +55,7 @@ useEffect(() => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none text-secondary/70 placeholder-gray-400"
+            className="w-full px-4 py-2 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none text-secondary/70 placeholder-gray-400"
             required
           />
 
@@ -91,7 +91,7 @@ useEffect(() => {
         {/* Links */}
         <p className="text-sm text-secondary/60 text-center mt-4">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-blue-500 hover:underline">
+          <Link to="/register" className="text-indigo-500 hover:underline">
             Sign up
           </Link>
         </p>

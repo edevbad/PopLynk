@@ -75,9 +75,9 @@ const NavBar = () => {
       <nav className="sticky md:px-10 top-0 z-[90] bg-primary/20 backdrop-blur-sm border-b border-secondary/20 shadow-sm">
         <div className="max-w-2xl mx-auto flex justify-between items-center px-6 py-4">
           {/* Logo */}
-          <div className="text-2xl font-extrabold text-indigo-600 tracking-tight">
+          <Link to={'/'} className="text-2xl font-extrabold text-indigo-600 tracking-tight">
             PopLynk
-          </div>
+          </Link>
 
           {/* Navigation */}
           {authSlice.isAuthenticated ? (
