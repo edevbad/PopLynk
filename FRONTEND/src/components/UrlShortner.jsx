@@ -109,7 +109,7 @@ const UrlShortner = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="bg-indigo text-white font-medium rounded-lg py-2 px-6 transition hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-300 w-full sm:w-auto"
+          className="hover:bg-indigo-800 cursor-pointer text-white font-medium rounded-lg py-2 px-6 transition bg-indigo-700 focus:ring-2 focus:ring-indigo-300 w-full sm:w-auto"
         >
           {isSubmitting ? 
       <div className="w-6 h-6 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>

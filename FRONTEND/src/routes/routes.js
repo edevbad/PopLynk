@@ -1,6 +1,8 @@
 import { createRootRoute ,Router} from "@tanstack/react-router";
 import App from "../App.jsx";
-import { dashboardRoute, loginRoute, registerRoute,landingRoute } from "./auth.routes.js";
+import { registerRoute,loginRoute } from "./auth.route.js";
+import {dashboardRoute} from './dashboard.route.js'
+import {landingRoute} from './home.route.js'
 
 // Root route
 const rootRoute = new createRootRoute({
